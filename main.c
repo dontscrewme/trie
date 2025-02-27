@@ -1,3 +1,7 @@
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+
 #define CHAR_TO_INDEX(c) ((int)(c) - (int)('a'))
 #define MAX_SIZE 26
 
@@ -138,4 +142,9 @@ int trie_search(struct trie* root, char* string, enum searchType type)
     }
 
     return trie_search_helper(root, string, sizeOfString, 0, type);
+}
+
+int main(void)
+{
+    return 0;
 }
