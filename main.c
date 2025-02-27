@@ -101,19 +101,13 @@ enum searchType
 
 int trie_search_helper(struct trie* root, char* string, unsigned sizeOfString, unsigned level, enum searchType type)
 {
-    unsigned index = CHAR_TO_INDEX(string[level]);
-    if (root->edges[index] == NULL)
-    {
-        return -1;
-    }
-
-    if (level == sizeOfString -1)
+    if (level == sizeOfString)
     {
         if (type == TYPE_PREFIX)
         {
             return 0;
         }
-        else if (type == TYPE_WORD && root->edges[index]->endOfWord == true)
+        else if (type == TYPE_WORD && root->endOfWord == true)
         {
             return 0;
         }
@@ -121,6 +115,12 @@ int trie_search_helper(struct trie* root, char* string, unsigned sizeOfString, u
         {
             return -1;
         }
+    }
+
+    unsigned index = CHAR_TO_INDEX(string[level]);
+    if (root->edges[index] == NULL)
+    {
+        return -1;
     }
 
     return trie_search_helper(root->edges[index], string, sizeOfString, level+1, type);
